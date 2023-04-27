@@ -51,9 +51,9 @@ fun runMenu() {
         val option = mainMenu()
         when (option) {
             1 -> addFranchise()
-            //2 -> updateFranchise()
-            //3 -> deleteFranchise()
-            //4 -> listFranchises()
+            2 -> updateFranchise()
+            3 -> deleteFranchise()
+            4 -> listFranchises()
 
             //5 -> addGame()
             //6 -> updateGame()
@@ -73,17 +73,53 @@ fun runMenu() {
 
 fun addFranchise(){
     val franName = readNextLine("Enter the name of the franchise: ")
-    val franPublisher = readNextLine("Enter the name of the franchise: ")
-    val franWorth = readNextInt("Enter the name of the franchise: ")
-    val franGenre = readNextLine("Enter the name of the franchise: ")
+    val franPublisher = readNextLine("Enter the name of the publisher: ")
+    val franWorth = readNextInt("Enter how much the franchise is worth: ")
+    val franGenre = readNextLine("Enter the genre of the franchise: ")
     val isAdded = franchiseAPI.add(Franchise(franName = franName, franPublisher = franPublisher, franWorth = franWorth, franGenre = franGenre))
 
     if (isAdded) {
-        println("Added Successfully")
+        println("Added Franchise Successfully")
     } else {
         println("Add Failed")
     }
 }
+
+fun updateFranchise() {
+    listFranchises()
+    if (franchiseAPI.numberOfFranchises() > 0) {
+        val id = readNextInt("Enter the id of the franchise to update: ")
+        if (franchiseAPI.findFranchise(id) != null) {
+            val franName = readNextLine("Enter the name of the franchise: ")
+            val franPublisher = readNextLine("Enter the name of the publisher: ")
+            val franWorth = readNextInt("Enter how much the franchise is worth: ")
+            val franGenre = readNextLine("Enter the genre of the franchise: ")
+
+            if (franchiseAPI.update(id, Franchise(0, franName, franPublisher, franWorth, franGenre))){
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
+        } else {
+            println("There are no franchises for this index number")
+        }
+    }
+}
+
+fun deleteFranchise() {
+    listFranchises()
+    if (franchiseAPI.numberOfFranchises() > 0) {
+        val id = readNextInt("Enter the id of the franchise to delete: ")
+        val franToDelete = franchiseAPI.delete(id)
+        if (franToDelete) {
+            println("Delete Successful!")
+        } else {
+            println("Delete NOT Successful")
+        }
+    }
+}
+
+fun listFranchises() = println(franchiseAPI.listAllFranchises())
 
 fun exit() {
     println("Exiting app")
