@@ -35,4 +35,6 @@ class FranchiseAPI {
         else formatListString(franchises)
 
     fun findFranchise(franId : Int) =  franchises.find{ franchise -> franchise.franId == franId }
+
+    fun numberOfFranchises() = franchises.size
 }
