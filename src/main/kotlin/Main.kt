@@ -8,6 +8,8 @@ import java.io.File
 import java.lang.System.exit
 import kotlin.system.exitProcess
 
+private val franchiseAPI = FranchiseAPI()
+
 fun main(args: Array<String>) {
     runMenu()
 }
@@ -48,7 +50,7 @@ fun runMenu() {
     do {
         val option = mainMenu()
         when (option) {
-            //1 -> addFranchise()
+            1 -> addFranchise()
             //2 -> updateFranchise()
             //3 -> deleteFranchise()
             //4 -> listFranchises()
@@ -67,6 +69,20 @@ fun runMenu() {
             else -> println("Invalid option entered: $option")
         }
     } while (true)
+}
+
+fun addFranchise(){
+    val franName = readNextLine("Enter the name of the franchise: ")
+    val franPublisher = readNextLine("Enter the name of the franchise: ")
+    val franWorth = readNextInt("Enter the name of the franchise: ")
+    val franGenre = readNextLine("Enter the name of the franchise: ")
+    val isAdded = franchiseAPI.add(Franchise(franName = franName, franPublisher = franPublisher, franWorth = franWorth, franGenre = franGenre))
+
+    if (isAdded) {
+        println("Added Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
 
 fun exit() {
