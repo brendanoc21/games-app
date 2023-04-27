@@ -41,6 +41,11 @@ data class Franchise(
         return false
     }
 
+    override fun toString(): String {
+        val active = if (franActivity) "Yes" else "No"
+        return "$franId: $franName, Publisher($franPublisher), Worth($franWorth), Genre($franGenre), Active($active) \n${listGames()}"
+    }
+
     fun listGames() =
         if (games.isEmpty())  "\tNo Games Added"
         else  Utilities.formatSetString(games)
