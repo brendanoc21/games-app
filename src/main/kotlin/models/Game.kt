@@ -6,4 +6,8 @@ data class Game (
     var gamePrice : Int,
     var gameProduced: Boolean = false){
 
+    override fun toString(): String {
+        val produced = if (gameProduced) "Yes" else "No"
+        return "$gameId: $gameName, Price($gamePrice), Produced($produced) "
+    }
 }

@@ -55,9 +55,9 @@ fun runMenu() {
             3 -> deleteFranchise()
             4 -> listFranchises()
 
-            //5 -> addGame()
-            //6 -> updateGame()
-            //7 -> deleteGame()
+            5 -> addGame()
+            6 -> updateGame()
+            7 -> deleteGame()
             //8 -> listGames()
 
             //9 -> searchFranchise()
@@ -71,6 +71,7 @@ fun runMenu() {
     } while (true)
 }
 
+// FRANCHISES ///////////////////////////////////////////////////////////////////////////
 fun addFranchise(){
     val franName = readNextLine("Enter the name of the franchise: ")
     val franPublisher = readNextLine("Enter the name of the publisher: ")
@@ -121,6 +122,76 @@ fun deleteFranchise() {
 
 fun listFranchises() = println(franchiseAPI.listAllFranchises())
 
+// GAMES ///////////////////////////////////////////////////////////////////////////////
+private fun addGame() {
+    val franchise: Franchise? = chooseFranchise()
+    if (franchise != null) {
+        if (franchise.addGame(Game(
+                gameName = readNextLine("\t Game Name: "),
+                gamePrice = readNextInt("\t Game Price: ")
+        )))
+            println("Added Successfully!")
+        else println("Add NOT Successful")
+    }
+}
+
+fun updateGame() {
+    val franchise: Franchise? = chooseFranchise()
+    if (franchise != null) {
+        val game: Game? = chooseGame(franchise)
+        if (game != null) {
+            val newName = readNextLine("Enter new name: ")
+            val newPrice = readNextInt("Enter new price: ")
+            if (franchise.update(game.gameId, Game(gameName = newName, gamePrice = newPrice))) {
+                println("Game updated")
+            } else {
+                println("Game NOT updated")
+            }
+        } else {
+            println("Invalid Game Id")
+        }
+    }
+}
+
+fun deleteGame() {
+    val franchise: Franchise? = chooseFranchise()
+    if (franchise != null) {
+        val game: Game? = chooseGame(franchise)
+        if (game != null) {
+            val isDeleted = franchise.delete(game.gameId)
+            if (isDeleted) {
+                println("Delete Successful!")
+            } else {
+                println("Delete NOT Successful")
+            }
+        }
+    }
+}
+
+private fun chooseFranchise(): Franchise? {
+    listFranchises()
+    if (franchiseAPI.numberOfFranchises() > 0) {
+        val franchise = franchiseAPI.findFranchise(readNextInt("\nEnter the id of the note: "))
+        if (franchise != null) {
+                return franchise
+        } else {
+            println("Franchise id is invalid")
+        }
+    }
+    return null
+}
+private fun chooseGame(franchise: Franchise): Game? {
+    if (franchise.numberOfGames() > 0) {
+        print(franchise.listGames())
+        return franchise.findOne(readNextInt("\nEnter the id of the game: "))
+    }
+    else{
+        println ("No games in chosen franchise")
+        return null
+    }
+}
+
+// ETC ///////////////////////////////////////////////////////////////////////////////
 fun exit() {
     println("Exiting app")
     exitProcess(0)
