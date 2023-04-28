@@ -11,7 +11,7 @@ import kotlin.system.exitProcess
 
 private val franchiseAPI = FranchiseAPI(JSONSerializer(File("franchises.json")))
 
-fun main(args: Array<String>) {
+fun main() {
     runMenu()
 }
 

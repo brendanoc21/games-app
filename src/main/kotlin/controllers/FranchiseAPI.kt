@@ -80,6 +80,7 @@ class FranchiseAPI(serializerType: Serializer) {
 
     @Throws(Exception::class)
     fun load() {
+        @Suppress("UNCHECKED_CAST")
         franchises = serializer.read() as ArrayList<Franchise>
     }
 }
