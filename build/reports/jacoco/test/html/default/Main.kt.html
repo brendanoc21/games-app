@@ -72,7 +72,7 @@ fun runMenu() {
 }
 
 // FRANCHISES ///////////////////////////////////////////////////////////////////////////
-fun addFranchise(){
+fun addFranchise() {
 <span class="nc" id="L76">    val franName = readNextLine(&quot;Enter the name of the franchise: &quot;)</span>
 <span class="nc" id="L77">    val franPublisher = readNextLine(&quot;Enter the name of the publisher: &quot;)</span>
 <span class="nc" id="L78">    val franWorth = readNextInt(&quot;Enter how much the franchise is worth: &quot;)</span>
@@ -96,7 +96,7 @@ fun updateFranchise() {
 <span class="nc" id="L96">            val franWorth = readNextInt(&quot;Enter how much the franchise is worth: &quot;)</span>
 <span class="nc" id="L97">            val franGenre = readNextLine(&quot;Enter the genre of the franchise: &quot;)</span>
 
-<span class="nc bnc" id="L99" title="All 2 branches missed.">            if (franchiseAPI.update(id, Franchise(0, franName, franPublisher, franWorth, franGenre))){</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">            if (franchiseAPI.update(id, Franchise(0, franName, franPublisher, franWorth, franGenre))) {</span>
 <span class="nc" id="L100">                println(&quot;Update Successful&quot;)</span>
             } else {
 <span class="nc" id="L102">                println(&quot;Update Failed&quot;)</span>
@@ -136,101 +136,103 @@ fun searchFranchises() {
 private fun addGame() {
 <span class="nc" id="L137">    val franchise: Franchise? = chooseFranchise()</span>
 <span class="nc bnc" id="L138" title="All 2 branches missed.">    if (franchise != null) {</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (franchise.addGame(Game(</span>
-<span class="nc" id="L140">                gameName = readNextLine(&quot;\t Game Name: &quot;),</span>
-<span class="nc" id="L141">                gamePrice = readNextInt(&quot;\t Game Price: &quot;)</span>
-        )))
-<span class="nc" id="L143">            println(&quot;Added Successfully!&quot;)</span>
-<span class="nc" id="L144">        else println(&quot;Add NOT Successful&quot;)</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (franchise.addGame(</span>
+<span class="nc" id="L140">                Game(</span>
+<span class="nc" id="L141">                        gameName = readNextLine(&quot;\t Game Name: &quot;),</span>
+<span class="nc" id="L142">                        gamePrice = readNextInt(&quot;\t Game Price: &quot;)</span>
+                    )
+            )
+        )
+<span class="nc" id="L146">            println(&quot;Added Successfully!&quot;)</span>
+<span class="nc" id="L147">        else println(&quot;Add NOT Successful&quot;)</span>
     }
-<span class="nc" id="L146">}</span>
+<span class="nc" id="L149">}</span>
 
 fun updateGame() {
-<span class="nc" id="L149">    val franchise: Franchise? = chooseFranchise()</span>
-<span class="nc bnc" id="L150" title="All 2 branches missed.">    if (franchise != null) {</span>
-<span class="nc" id="L151">        val game: Game? = chooseGame(franchise)</span>
-<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (game != null) {</span>
-<span class="nc" id="L153">            val newName = readNextLine(&quot;Enter new name: &quot;)</span>
-<span class="nc" id="L154">            val newPrice = readNextInt(&quot;Enter new price: &quot;)</span>
-<span class="nc bnc" id="L155" title="All 2 branches missed.">            if (franchise.update(game.gameId, Game(gameName = newName, gamePrice = newPrice))) {</span>
-<span class="nc" id="L156">                println(&quot;Game updated&quot;)</span>
+<span class="nc" id="L152">    val franchise: Franchise? = chooseFranchise()</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">    if (franchise != null) {</span>
+<span class="nc" id="L154">        val game: Game? = chooseGame(franchise)</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        if (game != null) {</span>
+<span class="nc" id="L156">            val newName = readNextLine(&quot;Enter new name: &quot;)</span>
+<span class="nc" id="L157">            val newPrice = readNextInt(&quot;Enter new price: &quot;)</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            if (franchise.update(game.gameId, Game(gameName = newName, gamePrice = newPrice))) {</span>
+<span class="nc" id="L159">                println(&quot;Game updated&quot;)</span>
             } else {
-<span class="nc" id="L158">                println(&quot;Game NOT updated&quot;)</span>
+<span class="nc" id="L161">                println(&quot;Game NOT updated&quot;)</span>
             }
         } else {
-<span class="nc" id="L161">            println(&quot;Invalid Game Id&quot;)</span>
+<span class="nc" id="L164">            println(&quot;Invalid Game Id&quot;)</span>
         }
     }
-<span class="nc" id="L164">}</span>
+<span class="nc" id="L167">}</span>
 
 fun deleteGame() {
-<span class="nc" id="L167">    val franchise: Franchise? = chooseFranchise()</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">    if (franchise != null) {</span>
-<span class="nc" id="L169">        val game: Game? = chooseGame(franchise)</span>
-<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (game != null) {</span>
-<span class="nc" id="L171">            val isDeleted = franchise.delete(game.gameId)</span>
-<span class="nc bnc" id="L172" title="All 2 branches missed.">            if (isDeleted) {</span>
-<span class="nc" id="L173">                println(&quot;Delete Successful!&quot;)</span>
+<span class="nc" id="L170">    val franchise: Franchise? = chooseFranchise()</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">    if (franchise != null) {</span>
+<span class="nc" id="L172">        val game: Game? = chooseGame(franchise)</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if (game != null) {</span>
+<span class="nc" id="L174">            val isDeleted = franchise.delete(game.gameId)</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            if (isDeleted) {</span>
+<span class="nc" id="L176">                println(&quot;Delete Successful!&quot;)</span>
             } else {
-<span class="nc" id="L175">                println(&quot;Delete NOT Successful&quot;)</span>
+<span class="nc" id="L178">                println(&quot;Delete NOT Successful&quot;)</span>
             }
         }
     }
-<span class="nc" id="L179">}</span>
+<span class="nc" id="L182">}</span>
 
 fun searchGames() {
-<span class="nc" id="L182">    val searchName = readNextLine(&quot;Enter name of game to search for: &quot;)</span>
-<span class="nc" id="L183">    val searchResults = franchiseAPI.searchGameName(searchName)</span>
-<span class="nc bnc" id="L184" title="All 4 branches missed.">    if (searchResults.isEmpty()) {</span>
-<span class="nc" id="L185">        println(&quot;No games of that name&quot;)</span>
+<span class="nc" id="L185">    val searchName = readNextLine(&quot;Enter name of game to search for: &quot;)</span>
+<span class="nc" id="L186">    val searchResults = franchiseAPI.searchGameName(searchName)</span>
+<span class="nc bnc" id="L187" title="All 4 branches missed.">    if (searchResults.isEmpty()) {</span>
+<span class="nc" id="L188">        println(&quot;No games of that name&quot;)</span>
     } else {
-<span class="nc" id="L187">        println(searchResults)</span>
+<span class="nc" id="L190">        println(searchResults)</span>
     }
-<span class="nc" id="L189">}</span>
+<span class="nc" id="L192">}</span>
 
-<span class="nc" id="L191">fun listGames() = println(franchiseAPI.listAllGames())</span>
+<span class="nc" id="L194">fun listGames() = println(franchiseAPI.listAllGames())</span>
 
 // HELPERS ///////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
-<span class="nc" id="L195">    listFranchises()</span>
-<span class="nc bnc" id="L196" title="All 2 branches missed.">    if (franchiseAPI.numberOfFranchises() &gt; 0) {</span>
-<span class="nc" id="L197">        val franchise = franchiseAPI.findFranchise(readNextInt(&quot;\nEnter the id of the franchise: &quot;))</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">        if (franchise != null) {</span>
-<span class="nc" id="L199">                return franchise</span>
+<span class="nc" id="L198">    listFranchises()</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">    if (franchiseAPI.numberOfFranchises() &gt; 0) {</span>
+<span class="nc" id="L200">        val franchise = franchiseAPI.findFranchise(readNextInt(&quot;\nEnter the id of the franchise: &quot;))</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (franchise != null) {</span>
+<span class="nc" id="L202">            return franchise</span>
         } else {
-<span class="nc" id="L201">            println(&quot;Franchise id is invalid&quot;)</span>
+<span class="nc" id="L204">            println(&quot;Franchise id is invalid&quot;)</span>
         }
     }
-<span class="nc" id="L204">    return null</span>
+<span class="nc" id="L207">    return null</span>
 }
 private fun chooseGame(franchise: Franchise): Game? {
-<span class="nc bnc" id="L207" title="All 2 branches missed.">    if (franchise.numberOfGames() &gt; 0) {</span>
-<span class="nc" id="L208">        print(franchise.listGames())</span>
-<span class="nc" id="L209">        return franchise.findOne(readNextInt(&quot;\nEnter the id of the game: &quot;))</span>
-    }
-    else{
-<span class="nc" id="L212">        println (&quot;No games in chosen franchise&quot;)</span>
-<span class="nc" id="L213">        return null</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">    if (franchise.numberOfGames() &gt; 0) {</span>
+<span class="nc" id="L211">        print(franchise.listGames())</span>
+<span class="nc" id="L212">        return franchise.findOne(readNextInt(&quot;\nEnter the id of the game: &quot;))</span>
+    } else {
+<span class="nc" id="L214">        println(&quot;No games in chosen franchise&quot;)</span>
+<span class="nc" id="L215">        return null</span>
     }
 }
 
 fun save() {
-<span class="nc" id="L218">    try {</span>
-<span class="nc" id="L219">        franchiseAPI.save()</span>
-<span class="nc" id="L220">    } catch (e: Exception) {</span>
-<span class="nc" id="L221">        System.err.println(&quot;Error writing to file: $e&quot;)</span>
+<span class="nc" id="L220">    try {</span>
+<span class="nc" id="L221">        franchiseAPI.save()</span>
+<span class="nc" id="L222">    } catch (e: Exception) {</span>
+<span class="nc" id="L223">        System.err.println(&quot;Error writing to file: $e&quot;)</span>
     }
-<span class="nc" id="L223">}</span>
+<span class="nc" id="L225">}</span>
 
 fun load() {
-<span class="nc" id="L226">    try {</span>
-<span class="nc" id="L227">        franchiseAPI.load()</span>
-<span class="nc" id="L228">    } catch (e: Exception) {</span>
-<span class="nc" id="L229">        System.err.println(&quot;Error reading from file: $e&quot;)</span>
+<span class="nc" id="L228">    try {</span>
+<span class="nc" id="L229">        franchiseAPI.load()</span>
+<span class="nc" id="L230">    } catch (e: Exception) {</span>
+<span class="nc" id="L231">        System.err.println(&quot;Error reading from file: $e&quot;)</span>
     }
-<span class="nc" id="L231">}</span>
+<span class="nc" id="L233">}</span>
 fun exit() {
-<span class="nc" id="L233">    println(&quot;Exiting app&quot;)</span>
-<span class="nc" id="L234">    exitProcess(0)</span>
+<span class="nc" id="L235">    println(&quot;Exiting app&quot;)</span>
+<span class="nc" id="L236">    exitProcess(0)</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

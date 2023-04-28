@@ -50,7 +50,7 @@ import java.util.ArrayList
 <span class="nc" id="L50">            else listOfGames</span>
 <span class="nc" id="L51">        }</span>
 
-<span class="fc bfc" id="L53" title="All 6 branches covered.">    fun findFranchise(franId : Int) =  franchises.find{ franchise -&gt; franchise.franId == franId }</span>
+<span class="fc bfc" id="L53" title="All 6 branches covered.">    fun findFranchise(franId: Int) = franchises.find { franchise -&gt; franchise.franId == franId }</span>
 
     fun searchFranchiseName(searchString: String) =
 <span class="nc bnc" id="L56" title="All 2 branches missed.">        formatListString(franchises.filter { franchise -&gt; franchise.franName.contains(searchString, ignoreCase = true) })</span>

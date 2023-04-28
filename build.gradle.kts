@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-
 plugins {
     kotlin("jvm") version "1.7.10"
     // Plugin for Dokka - KDoc generating tool
@@ -57,4 +56,3 @@ tasks.jar {
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
 }
-

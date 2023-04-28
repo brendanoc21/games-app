@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controllers.FranchiseAPITest$DeleteFranchises" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-04-28T13:20:20" hostname="LAPTOP-AKQ5IE6U" time="0.033">
+<testsuite name="controllers.FranchiseAPITest$DeleteFranchises" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-04-28T15:21:49" hostname="LAPTOP-AKQ5IE6U" time="0.006">
   <properties/>
-  <testcase name="deleting a Franchise that does not exist, returns false()" classname="controllers.FranchiseAPITest$DeleteFranchises" time="0.007"/>
-  <testcase name="deleting a franchise that exists delete and returns deleted object()" classname="controllers.FranchiseAPITest$DeleteFranchises" time="0.005"/>
+  <testcase name="deleting a Franchise that does not exist, returns false()" classname="controllers.FranchiseAPITest$DeleteFranchises" time="0.003"/>
+  <testcase name="deleting a franchise that exists delete and returns deleted object()" classname="controllers.FranchiseAPITest$DeleteFranchises" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
