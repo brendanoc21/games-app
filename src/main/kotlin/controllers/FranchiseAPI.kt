@@ -36,5 +36,24 @@ class FranchiseAPI {
 
     fun findFranchise(franId : Int) =  franchises.find{ franchise -> franchise.franId == franId }
 
+    fun searchFranchiseName(searchString: String) =
+        formatListString(franchises.filter { franchise -> franchise.franName.contains(searchString, ignoreCase = true) })
+
+    fun searchGameName(searchString: String): String {
+        return if (numberOfFranchises() == 0) "No franchises available"
+        else {
+            var listOfFranchises = ""
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if (game.gameName.contains(searchString, ignoreCase = true)) {
+                        listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
+                }
+            }
+            if (listOfFranchises == "") "No items found for: $searchString"
+            else listOfFranchises
+        }
+    }
+
     fun numberOfFranchises() = franchises.size
 }

@@ -60,8 +60,8 @@ fun runMenu() {
             7 -> deleteGame()
             //8 -> listGames()
 
-            //9 -> searchFranchise()
-            //10 -> searchGames()
+            9 -> searchFranchises()
+            10 -> searchGames()
 
             //11 -> save()
             //12 -> load()
@@ -120,6 +120,16 @@ fun deleteFranchise() {
     }
 }
 
+fun searchFranchises() {
+    val searchName = readNextLine("Enter the name of franchise to search for: ")
+    val searchResults = franchiseAPI.searchFranchiseName(searchName)
+    if (searchResults.isEmpty()) {
+        println("No notes found")
+    } else {
+        println(searchResults)
+    }
+}
+
 fun listFranchises() = println(franchiseAPI.listAllFranchises())
 
 // GAMES ///////////////////////////////////////////////////////////////////////////////
@@ -168,6 +178,18 @@ fun deleteGame() {
     }
 }
 
+fun searchGames() {
+    val searchName = readNextLine("Enter name of game to search for: ")
+    val searchResults = franchiseAPI.searchGameName(searchName)
+    if (searchResults.isEmpty()) {
+        println("No games of that name")
+    } else {
+        println(searchResults)
+    }
+}
+
+
+// ETC ///////////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
     listFranchises()
     if (franchiseAPI.numberOfFranchises() > 0) {
@@ -191,7 +213,6 @@ private fun chooseGame(franchise: Franchise): Game? {
     }
 }
 
-// ETC ///////////////////////////////////////////////////////////////////////////////
 fun exit() {
     println("Exiting app")
     exitProcess(0)
