@@ -6,7 +6,6 @@ import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.io.File
-import java.lang.System.exit
 import kotlin.system.exitProcess
 
 private val franchiseAPI = FranchiseAPI(JSONSerializer(File("franchises.json")))
@@ -73,7 +72,7 @@ fun runMenu() {
 }
 
 // FRANCHISES ///////////////////////////////////////////////////////////////////////////
-fun addFranchise(){
+fun addFranchise() {
     val franName = readNextLine("Enter the name of the franchise: ")
     val franPublisher = readNextLine("Enter the name of the publisher: ")
     val franWorth = readNextInt("Enter how much the franchise is worth: ")
@@ -97,7 +96,7 @@ fun updateFranchise() {
             val franWorth = readNextInt("Enter how much the franchise is worth: ")
             val franGenre = readNextLine("Enter the genre of the franchise: ")
 
-            if (franchiseAPI.update(id, Franchise(0, franName, franPublisher, franWorth, franGenre))){
+            if (franchiseAPI.update(id, Franchise(0, franName, franPublisher, franWorth, franGenre))) {
                 println("Update Successful")
             } else {
                 println("Update Failed")
@@ -137,10 +136,13 @@ fun listFranchises() = println(franchiseAPI.listAllFranchises())
 private fun addGame() {
     val franchise: Franchise? = chooseFranchise()
     if (franchise != null) {
-        if (franchise.addGame(Game(
-                gameName = readNextLine("\t Game Name: "),
-                gamePrice = readNextInt("\t Game Price: ")
-        )))
+        if (franchise.addGame(
+                Game(
+                        gameName = readNextLine("\t Game Name: "),
+                        gamePrice = readNextInt("\t Game Price: ")
+                    )
+            )
+        )
             println("Added Successfully!")
         else println("Add NOT Successful")
     }
@@ -197,7 +199,7 @@ private fun chooseFranchise(): Franchise? {
     if (franchiseAPI.numberOfFranchises() > 0) {
         val franchise = franchiseAPI.findFranchise(readNextInt("\nEnter the id of the franchise: "))
         if (franchise != null) {
-                return franchise
+            return franchise
         } else {
             println("Franchise id is invalid")
         }
@@ -208,9 +210,8 @@ private fun chooseGame(franchise: Franchise): Game? {
     if (franchise.numberOfGames() > 0) {
         print(franchise.listGames())
         return franchise.findOne(readNextInt("\nEnter the id of the game: "))
-    }
-    else{
-        println ("No games in chosen franchise")
+    } else {
+        println("No games in chosen franchise")
         return null
     }
 }
