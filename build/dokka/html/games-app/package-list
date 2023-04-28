@@ -1,0 +1,78 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/games-app/[root]/index.html
+$dokka.location://addFranchise/#/PointingToDeclaration/games-app/[root]/add-franchise.html
+$dokka.location://deleteFranchise/#/PointingToDeclaration/games-app/[root]/delete-franchise.html
+$dokka.location://deleteGame/#/PointingToDeclaration/games-app/[root]/delete-game.html
+$dokka.location://exit/#/PointingToDeclaration/games-app/[root]/exit.html
+$dokka.location://listFranchises/#/PointingToDeclaration/games-app/[root]/list-franchises.html
+$dokka.location://listGames/#/PointingToDeclaration/games-app/[root]/list-games.html
+$dokka.location://load/#/PointingToDeclaration/games-app/[root]/load.html
+$dokka.location://main/#kotlin.Array[kotlin.String]/PointingToDeclaration/games-app/[root]/main.html
+$dokka.location://mainMenu/#/PointingToDeclaration/games-app/[root]/main-menu.html
+$dokka.location://runMenu/#/PointingToDeclaration/games-app/[root]/run-menu.html
+$dokka.location://save/#/PointingToDeclaration/games-app/[root]/save.html
+$dokka.location://searchFranchises/#/PointingToDeclaration/games-app/[root]/search-franchises.html
+$dokka.location://searchGames/#/PointingToDeclaration/games-app/[root]/search-games.html
+$dokka.location://updateFranchise/#/PointingToDeclaration/games-app/[root]/update-franchise.html
+$dokka.location://updateGame/#/PointingToDeclaration/games-app/[root]/update-game.html
+$dokka.location:controllers////PointingToDeclaration/games-app/controllers/index.html
+$dokka.location:controllers/FranchiseAPI///PointingToDeclaration/games-app/controllers/-franchise-a-p-i/index.html
+$dokka.location:controllers/FranchiseAPI/FranchiseAPI/#persistence.Serializer/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/-franchise-a-p-i.html
+$dokka.location:controllers/FranchiseAPI/add/#models.Franchise/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/add.html
+$dokka.location:controllers/FranchiseAPI/delete/#kotlin.Int/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/delete.html
+$dokka.location:controllers/FranchiseAPI/findFranchise/#kotlin.Int/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/find-franchise.html
+$dokka.location:controllers/FranchiseAPI/listAllFranchises/#/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/list-all-franchises.html
+$dokka.location:controllers/FranchiseAPI/listAllGames/#/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/list-all-games.html
+$dokka.location:controllers/FranchiseAPI/load/#/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/load.html
+$dokka.location:controllers/FranchiseAPI/numberOfFranchises/#/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/number-of-franchises.html
+$dokka.location:controllers/FranchiseAPI/save/#/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/save.html
+$dokka.location:controllers/FranchiseAPI/searchFranchiseName/#kotlin.String/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/search-franchise-name.html
+$dokka.location:controllers/FranchiseAPI/searchGameName/#kotlin.String/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/search-game-name.html
+$dokka.location:controllers/FranchiseAPI/update/#kotlin.Int#models.Franchise?/PointingToDeclaration/games-app/controllers/-franchise-a-p-i/update.html
+$dokka.location:models////PointingToDeclaration/games-app/models/index.html
+$dokka.location:models/Franchise///PointingToDeclaration/games-app/models/-franchise/index.html
+$dokka.location:models/Franchise/Franchise/#kotlin.Int#kotlin.String#kotlin.String#kotlin.Int#kotlin.String#kotlin.Boolean#kotlin.collections.MutableSet[models.Game]/PointingToDeclaration/games-app/models/-franchise/-franchise.html
+$dokka.location:models/Franchise/addGame/#models.Game/PointingToDeclaration/games-app/models/-franchise/add-game.html
+$dokka.location:models/Franchise/delete/#kotlin.Int/PointingToDeclaration/games-app/models/-franchise/delete.html
+$dokka.location:models/Franchise/findOne/#kotlin.Int/PointingToDeclaration/games-app/models/-franchise/find-one.html
+$dokka.location:models/Franchise/franActivity/#/PointingToDeclaration/games-app/models/-franchise/fran-activity.html
+$dokka.location:models/Franchise/franGenre/#/PointingToDeclaration/games-app/models/-franchise/fran-genre.html
+$dokka.location:models/Franchise/franId/#/PointingToDeclaration/games-app/models/-franchise/fran-id.html
+$dokka.location:models/Franchise/franName/#/PointingToDeclaration/games-app/models/-franchise/fran-name.html
+$dokka.location:models/Franchise/franPublisher/#/PointingToDeclaration/games-app/models/-franchise/fran-publisher.html
+$dokka.location:models/Franchise/franWorth/#/PointingToDeclaration/games-app/models/-franchise/fran-worth.html
+$dokka.location:models/Franchise/games/#/PointingToDeclaration/games-app/models/-franchise/games.html
+$dokka.location:models/Franchise/listGames/#/PointingToDeclaration/games-app/models/-franchise/list-games.html
+$dokka.location:models/Franchise/numberOfGames/#/PointingToDeclaration/games-app/models/-franchise/number-of-games.html
+$dokka.location:models/Franchise/toString/#/PointingToDeclaration/games-app/models/-franchise/to-string.html
+$dokka.location:models/Franchise/update/#kotlin.Int#models.Game/PointingToDeclaration/games-app/models/-franchise/update.html
+$dokka.location:models/Game///PointingToDeclaration/games-app/models/-game/index.html
+$dokka.location:models/Game/Game/#kotlin.Int#kotlin.String#kotlin.Int#kotlin.Boolean/PointingToDeclaration/games-app/models/-game/-game.html
+$dokka.location:models/Game/gameId/#/PointingToDeclaration/games-app/models/-game/game-id.html
+$dokka.location:models/Game/gameName/#/PointingToDeclaration/games-app/models/-game/game-name.html
+$dokka.location:models/Game/gamePrice/#/PointingToDeclaration/games-app/models/-game/game-price.html
+$dokka.location:models/Game/gameProduced/#/PointingToDeclaration/games-app/models/-game/game-produced.html
+$dokka.location:models/Game/toString/#/PointingToDeclaration/games-app/models/-game/to-string.html
+$dokka.location:persistence////PointingToDeclaration/games-app/persistence/index.html
+$dokka.location:persistence/JSONSerializer///PointingToDeclaration/games-app/persistence/-j-s-o-n-serializer/index.html
+$dokka.location:persistence/JSONSerializer/JSONSerializer/#java.io.File/PointingToDeclaration/games-app/persistence/-j-s-o-n-serializer/-j-s-o-n-serializer.html
+$dokka.location:persistence/JSONSerializer/read/#/PointingToDeclaration/games-app/persistence/-j-s-o-n-serializer/read.html
+$dokka.location:persistence/JSONSerializer/write/#kotlin.Any?/PointingToDeclaration/games-app/persistence/-j-s-o-n-serializer/write.html
+$dokka.location:persistence/Serializer///PointingToDeclaration/games-app/persistence/-serializer/index.html
+$dokka.location:persistence/Serializer/read/#/PointingToDeclaration/games-app/persistence/-serializer/read.html
+$dokka.location:persistence/Serializer/write/#kotlin.Any?/PointingToDeclaration/games-app/persistence/-serializer/write.html
+$dokka.location:utils////PointingToDeclaration/games-app/utils/index.html
+$dokka.location:utils/ScannerInput///PointingToDeclaration/games-app/utils/-scanner-input/index.html
+$dokka.location:utils/ScannerInput/readNextChar/#kotlin.String?/PointingToDeclaration/games-app/utils/-scanner-input/read-next-char.html
+$dokka.location:utils/ScannerInput/readNextDouble/#kotlin.String?/PointingToDeclaration/games-app/utils/-scanner-input/read-next-double.html
+$dokka.location:utils/ScannerInput/readNextInt/#kotlin.String?/PointingToDeclaration/games-app/utils/-scanner-input/read-next-int.html
+$dokka.location:utils/ScannerInput/readNextLine/#kotlin.String?/PointingToDeclaration/games-app/utils/-scanner-input/read-next-line.html
+$dokka.location:utils/Utilities///PointingToDeclaration/games-app/utils/-utilities/index.html
+$dokka.location:utils/Utilities/formatListString/#kotlin.collections.List[models.Franchise]/PointingToDeclaration/games-app/utils/-utilities/format-list-string.html
+$dokka.location:utils/Utilities/formatSetString/#kotlin.collections.Set[models.Game]/PointingToDeclaration/games-app/utils/-utilities/format-set-string.html
+controllers
+models
+persistence
+utils
+
