@@ -1,6 +1,7 @@
 import controllers.FranchiseAPI
 import models.Franchise
 import models.Game
+import persistence.JSONSerializer
 import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
@@ -8,7 +9,7 @@ import java.io.File
 import java.lang.System.exit
 import kotlin.system.exitProcess
 
-private val franchiseAPI = FranchiseAPI()
+private val franchiseAPI = FranchiseAPI(JSONSerializer(File("franchises.json")))
 
 fun main(args: Array<String>) {
     runMenu()
@@ -63,8 +64,8 @@ fun runMenu() {
             9 -> searchFranchises()
             10 -> searchGames()
 
-            //11 -> save()
-            //12 -> load()
+            11 -> save()
+            12 -> load()
             0 -> exit()
             else -> println("Invalid option entered: $option")
         }
@@ -124,7 +125,7 @@ fun searchFranchises() {
     val searchName = readNextLine("Enter the name of franchise to search for: ")
     val searchResults = franchiseAPI.searchFranchiseName(searchName)
     if (searchResults.isEmpty()) {
-        println("No notes found")
+        println("No franchises found")
     } else {
         println(searchResults)
     }
@@ -190,11 +191,11 @@ fun searchGames() {
 
 fun listGames() = println(franchiseAPI.listAllGames())
 
-// ETC ///////////////////////////////////////////////////////////////////////////////
+// HELPERS ///////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
     listFranchises()
     if (franchiseAPI.numberOfFranchises() > 0) {
-        val franchise = franchiseAPI.findFranchise(readNextInt("\nEnter the id of the note: "))
+        val franchise = franchiseAPI.findFranchise(readNextInt("\nEnter the id of the franchise: "))
         if (franchise != null) {
                 return franchise
         } else {
@@ -214,6 +215,21 @@ private fun chooseGame(franchise: Franchise): Game? {
     }
 }
 
+fun save() {
+    try {
+        franchiseAPI.save()
+    } catch (e: Exception) {
+        System.err.println("Error writing to file: $e")
+    }
+}
+
+fun load() {
+    try {
+        franchiseAPI.load()
+    } catch (e: Exception) {
+        System.err.println("Error reading from file: $e")
+    }
+}
 fun exit() {
     println("Exiting app")
     exitProcess(0)

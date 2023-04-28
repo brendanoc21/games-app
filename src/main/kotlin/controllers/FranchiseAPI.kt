@@ -1,10 +1,13 @@
 package controllers
 
 import models.Franchise
+import persistence.Serializer
 import utils.Utilities.formatListString
 import java.util.ArrayList
 
-class FranchiseAPI {
+class FranchiseAPI(serializerType: Serializer) {
+    private var serializer: Serializer = serializerType
+
     private var franchises = ArrayList<Franchise>()
 
     private var lastId = 0
@@ -69,4 +72,14 @@ class FranchiseAPI {
     }
 
     fun numberOfFranchises() = franchises.size
+
+    @Throws(Exception::class)
+    fun save() {
+        serializer.write(franchises)
+    }
+
+    @Throws(Exception::class)
+    fun load() {
+        franchises = serializer.read() as ArrayList<Franchise>
+    }
 }
