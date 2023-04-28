@@ -9,30 +9,31 @@ data class Franchise(
     var franWorth: Int,
     var franGenre: String,
     var franActivity: Boolean = false,
-    var games : MutableSet<Game> = mutableSetOf()){
+    var games: MutableSet<Game> = mutableSetOf()
+) {
 
     private var lastGameId = 0
     private fun getGameId() = lastGameId++
 
-    fun addGame(game: Game) : Boolean {
+    fun addGame(game: Game): Boolean {
         game.gameId = getGameId()
         return games.add(game)
     }
 
     fun numberOfGames() = games.size
 
-    fun findOne(id: Int): Game?{
-        return games.find{ game -> game.gameId == id }
+    fun findOne(id: Int): Game? {
+        return games.find { game -> game.gameId == id }
     }
 
     fun delete(id: Int): Boolean {
-        return games.removeIf { game -> game.gameId == id}
+        return games.removeIf { game -> game.gameId == id }
     }
 
-    fun update(id: Int, newGame : Game): Boolean {
+    fun update(id: Int, newGame: Game): Boolean {
         val foundGame = findOne(id)
 
-        if (foundGame != null){
+        if (foundGame != null) {
             foundGame.gameName = newGame.gameName
             foundGame.gamePrice = newGame.gamePrice
             foundGame.gameProduced = newGame.gameProduced
@@ -47,7 +48,6 @@ data class Franchise(
     }
 
     fun listGames() =
-        if (games.isEmpty())  "\tNo Games Added"
-        else  Utilities.formatSetString(games)
-
+        if (games.isEmpty()) "\tNo Games Added"
+        else Utilities.formatSetString(games)
 }

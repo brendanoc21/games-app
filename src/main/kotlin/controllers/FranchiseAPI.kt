@@ -50,7 +50,7 @@ class FranchiseAPI(serializerType: Serializer) {
             else listOfGames
         }
 
-    fun findFranchise(franId : Int) =  franchises.find{ franchise -> franchise.franId == franId }
+    fun findFranchise(franId: Int) = franchises.find { franchise -> franchise.franId == franId }
 
     fun searchFranchiseName(searchString: String) =
         formatListString(franchises.filter { franchise -> franchise.franName.contains(searchString, ignoreCase = true) })
