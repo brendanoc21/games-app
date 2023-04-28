@@ -58,7 +58,7 @@ fun runMenu() {
             5 -> addGame()
             6 -> updateGame()
             7 -> deleteGame()
-            //8 -> listGames()
+            8 -> listGames()
 
             9 -> searchFranchises()
             10 -> searchGames()
@@ -188,6 +188,7 @@ fun searchGames() {
     }
 }
 
+fun listGames() = println(franchiseAPI.listAllGames())
 
 // ETC ///////////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
