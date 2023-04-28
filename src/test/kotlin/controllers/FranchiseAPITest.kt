@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test
 import persistence.JSONSerializer
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class FranchiseAPITest {
@@ -64,6 +66,74 @@ class FranchiseAPITest {
             assertTrue(emptyFranchises!!.add(newFranchise))
             assertEquals(1, emptyFranchises!!.numberOfFranchises())
             assertEquals(newFranchise, emptyFranchises!!.findFranchise(emptyFranchises!!.numberOfFranchises() - 1))
+        }
+    }
+
+    @Nested
+    inner class UpdateFranchises {
+        @Test
+        fun `updating a franchise that does not exist returns false`() {
+            assertFalse(populatedFranchises!!.update(6, Franchise(6, "Updating Franchise", "Updating Franchise", 100, "I am updating a franchise")))
+            assertFalse(populatedFranchises!!.update(-1, Franchise(-1, "Updating Franchise", "Updating Franchise", 100, "I am updating a franchise")))
+            assertFalse(emptyFranchises!!.update(0, Franchise(0, "Updating Franchise", "Updating Franchise", 100, "I am updating a franchise")))
+        }
+
+        @Test
+        fun `updating a franchise that exists returns true and updates`() {
+            // check franchise 5 exists and check the contents
+            assertEquals(callOfDuty, populatedFranchises!!.findFranchise(4))
+            assertEquals("Call of Duty", populatedFranchises!!.findFranchise(4)!!.franName)
+            assertEquals("Activision", populatedFranchises!!.findFranchise(4)!!.franPublisher)
+            assertEquals(546000000, populatedFranchises!!.findFranchise(4)!!.franWorth)
+            assertEquals("Shooter", populatedFranchises!!.findFranchise(4)!!.franGenre)
+
+            // update franchise 5 with new information and ensure contents updated successfully
+            assertTrue(populatedFranchises!!.update(4, Franchise(4, "Updated", "Updated", 10, "Updated")))
+            assertEquals("Updated", populatedFranchises!!.findFranchise(4)!!.franName)
+            assertEquals("Updated", populatedFranchises!!.findFranchise(4)!!.franPublisher)
+            assertEquals(10, populatedFranchises!!.findFranchise(4)!!.franWorth)
+            assertEquals("Updated", populatedFranchises!!.findFranchise(4)!!.franGenre)
+        }
+    }
+
+    @Nested
+    inner class DeleteFranchises {
+
+        @Test
+        fun `deleting a Franchise that does not exist, returns false`() {
+            assertEquals(false, emptyFranchises!!.delete(0))
+            assertEquals(false, populatedFranchises!!.delete(-1))
+            assertEquals(false, populatedFranchises!!.delete(5))
+        }
+
+        @Test
+        fun `deleting a franchise that exists delete and returns deleted object`() {
+            assertEquals(5, populatedFranchises!!.numberOfFranchises())
+            assertEquals(true, populatedFranchises!!.delete(4))
+            assertEquals(4, populatedFranchises!!.numberOfFranchises())
+            assertEquals(true, populatedFranchises!!.delete(0))
+            assertEquals(3, populatedFranchises!!.numberOfFranchises())
+        }
+    }
+
+    @Nested
+    inner class ListFranchises {
+
+        @Test
+        fun `listAllFranchises returns No Franchises Stored message when ArrayList is empty`() {
+            assertEquals(0, emptyFranchises!!.numberOfFranchises())
+            assertTrue(emptyFranchises!!.listAllFranchises().lowercase().contains("no franchises"))
+        }
+
+        @Test
+        fun `listAllFranchises returns Franchises when ArrayList has franchises stored`() {
+            assertEquals(5, populatedFranchises!!.numberOfFranchises())
+            val franchisesString = populatedFranchises!!.listAllFranchises().lowercase()
+            assertTrue(franchisesString.contains("pokemon"))
+            assertTrue(franchisesString.contains("minecraft"))
+            assertTrue(franchisesString.contains("fortnite"))
+            assertTrue(franchisesString.contains("pacman"))
+            assertTrue(franchisesString.contains("call of duty"))
         }
     }
 }
