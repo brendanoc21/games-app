@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controllers.FranchiseAPITest$ListFranchises" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-04-28T15:35:13" hostname="LAPTOP-AKQ5IE6U" time="0.025">
-  <properties/>
-  <testcase name="listAllFranchises returns Franchises when ArrayList has franchises stored()" classname="controllers.FranchiseAPITest$ListFranchises" time="0.021"/>
-  <testcase name="listAllFranchises returns No Franchises Stored message when ArrayList is empty()" classname="controllers.FranchiseAPITest$ListFranchises" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
