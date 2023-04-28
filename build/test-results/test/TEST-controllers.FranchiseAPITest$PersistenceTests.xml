@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="controllers.FranchiseAPITest$PersistenceTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-04-28T15:21:49" hostname="LAPTOP-AKQ5IE6U" time="1.843">
-  <properties/>
-  <testcase name="saving and loading an loaded collection in JSON doesn't loose data()" classname="controllers.FranchiseAPITest$PersistenceTests" time="1.814"/>
-  <testcase name="saving and loading an empty collection in JSON doesn't crash app()" classname="controllers.FranchiseAPITest$PersistenceTests" time="0.027"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
