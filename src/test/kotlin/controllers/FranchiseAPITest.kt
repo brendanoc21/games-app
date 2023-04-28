@@ -136,4 +136,39 @@ class FranchiseAPITest {
             assertTrue(franchisesString.contains("call of duty"))
         }
     }
+
+    @Nested
+    inner class PersistenceTests {
+        @Test
+        fun `saving and loading an empty collection in JSON doesn't crash app`() {
+            val storingFranchises = FranchiseAPI(JSONSerializer(File("franchises.json")))
+            storingFranchises.save()
+
+            val loadedFranchises = FranchiseAPI(JSONSerializer(File("franchises.json")))
+            loadedFranchises.load()
+
+            assertEquals(0, storingFranchises.numberOfFranchises())
+            assertEquals(0, loadedFranchises.numberOfFranchises())
+            assertEquals(storingFranchises.numberOfFranchises(), loadedFranchises.numberOfFranchises())
+        }
+
+        @Test
+        fun `saving and loading an loaded collection in JSON doesn't loose data`() {
+            val storingFranchises = FranchiseAPI(JSONSerializer(File("franchises.json")))
+            storingFranchises.add(pokemon!!)
+            storingFranchises.add(minecraft!!)
+            storingFranchises.add(fortnite!!)
+            storingFranchises.save()
+
+            val loadedFranchises = FranchiseAPI(JSONSerializer(File("franchises.json")))
+            loadedFranchises.load()
+
+            assertEquals(3, storingFranchises.numberOfFranchises())
+            assertEquals(3, loadedFranchises.numberOfFranchises())
+            assertEquals(storingFranchises.numberOfFranchises(), loadedFranchises.numberOfFranchises())
+            assertEquals(storingFranchises.findFranchise(0), loadedFranchises.findFranchise(0))
+            assertEquals(storingFranchises.findFranchise(1), loadedFranchises.findFranchise(1))
+            assertEquals(storingFranchises.findFranchise(2), loadedFranchises.findFranchise(2))
+        }
+    }
 }
