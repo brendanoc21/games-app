@@ -13,6 +13,7 @@ class FranchiseAPI(serializerType: Serializer) {
     private var lastId = 0
     private fun getId() = lastId++
 
+// CRUD //////////////////////////////////////////////////////////////////////////////
     fun add(franchise: Franchise): Boolean {
         franchise.franId = getId()
         return franchises.add(franchise)
@@ -33,6 +34,22 @@ class FranchiseAPI(serializerType: Serializer) {
         return false
     }
 
+    fun changeFranActivity(id: Int): Boolean {
+        val foundFranchise = findFranchise(id)
+        if ((foundFranchise != null) && (!foundFranchise.franActivity)) {
+            foundFranchise.franActivity = true
+            return true
+        } else if ((foundFranchise != null) && (foundFranchise.franActivity)) {
+            foundFranchise.franActivity = false
+            for (game in foundFranchise.games) {
+                game.gameProduced = false
+            }
+            return true
+        }
+        return false
+    }
+
+// LISTING //////////////////////////////////////////////////////////////////////////////
     fun listAllFranchises() =
         if (franchises.isEmpty()) "There are no Franchises"
         else formatListString(franchises)
@@ -88,26 +105,8 @@ class FranchiseAPI(serializerType: Serializer) {
             else listOfGames
         }
 
+// HELPERS ///////////////////////////////////////////////////////////////////////////
     fun findFranchise(franId: Int) = franchises.find { franchise -> franchise.franId == franId }
-
-    fun searchFranchiseName(searchString: String) =
-        formatListString(franchises.filter { franchise -> franchise.franName.contains(searchString, ignoreCase = true) })
-
-    fun searchGameName(searchString: String): String {
-        return if (numberOfFranchises() == 0) "No franchises available"
-        else {
-            var listOfFranchises = ""
-            for (franchise in franchises) {
-                for (game in franchise.games) {
-                    if (game.gameName.contains(searchString, ignoreCase = true)) {
-                        listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
-                    }
-                }
-            }
-            if (listOfFranchises == "") "No games found for: $searchString"
-            else listOfFranchises
-        }
-    }
 
     fun numberOfFranchises() = franchises.size
     fun numberOfActiveFranchises(): Int = franchises.count { franchise: Franchise -> franchise.franActivity }
@@ -153,20 +152,67 @@ class FranchiseAPI(serializerType: Serializer) {
             gameAmount
         }
 
-    fun changeFranActivity(id: Int): Boolean {
-        val foundFranchise = findFranchise(id)
-        if ((foundFranchise != null) && (!foundFranchise.franActivity)) {
-            foundFranchise.franActivity = true
-            return true
-        } else if ((foundFranchise != null) && (foundFranchise.franActivity)) {
-            foundFranchise.franActivity = false
-            for (game in foundFranchise.games) {
-                game.gameProduced = false
+
+// SEARCHES //////////////////////////////////////////////////////////////////////////
+    fun searchFranchiseName(searchString: String) =
+        formatListString(franchises.filter { franchise -> franchise.franName.contains(searchString, ignoreCase = true) })
+
+    fun searchFranchisePublisher(searchString: String) =
+        formatListString(franchises.filter { franchise -> franchise.franPublisher.contains(searchString, ignoreCase = true) })
+
+    fun searchFranchiseWorth(searchInt: Int) =
+        formatListString(franchises.filter { franchise -> franchise.franWorth <= searchInt })
+
+    fun searchFranchiseGenre(searchString: String) =
+        formatListString(franchises.filter { franchise -> franchise.franGenre.contains(searchString, ignoreCase = true) })
+
+    fun searchGameName(searchString: String): String {
+        return if (numberOfFranchises() == 0) "No franchises available"
+        else {
+            var listOfFranchises = ""
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if (game.gameName.contains(searchString, ignoreCase = true)) {
+                        listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
+                }
             }
-            return true
+            if (listOfFranchises == "") "No games found for: $searchString"
+            else listOfFranchises
         }
-        return false
     }
+
+    fun searchGamePrice(searchInt: Int): String {
+        return if (numberOfFranchises() == 0) "No franchises available"
+        else {
+            var listOfFranchises = ""
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if (game.gamePrice <= searchInt) {
+                        listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
+                }
+            }
+            if (listOfFranchises == "") "No games found with price below: $searchInt"
+            else listOfFranchises
+        }
+    }
+
+    fun searchGamePublisher(searchString: String): String {
+        return if (numberOfFranchises() == 0) "No franchises available"
+        else {
+            var listOfFranchises = ""
+            for (franchise in franchises) {
+                if (franchise.franPublisher.contains(searchString, ignoreCase = true))
+                for (game in franchise.games) {
+                    listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                }
+            }
+            if (listOfFranchises == "") "No games found for: $searchString"
+            else listOfFranchises
+        }
+    }
+// SAVE LOAD /////////////////////////////////////////////////////////////////////////
     @Throws(Exception::class)
     fun save() {
         serializer.write(franchises)
