@@ -106,5 +106,6 @@ class FranchiseAPI(serializerType: Serializer) {
     fun load() {
         @Suppress("UNCHECKED_CAST")
         franchises = serializer.read() as ArrayList<Franchise>
+        lastId = franchises.size
     }
 }
