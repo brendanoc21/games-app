@@ -16,6 +16,7 @@ data class Franchise(
     private fun getGameId() = lastGameId++
 
     fun addGame(game: Game): Boolean {
+        lastGameId = games.size
         game.gameId = getGameId()
         return games.add(game)
     }
@@ -50,4 +51,6 @@ data class Franchise(
     fun listGames() =
         if (games.isEmpty()) "\tNo Games Added"
         else Utilities.formatSetString(games)
+
+    fun amountOfGames() = games.size
 }
