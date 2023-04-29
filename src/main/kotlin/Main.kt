@@ -35,14 +35,21 @@ fun mainMenu(): Int {
          > /  10) Set game production status        /
          > ------------------------------------------
          > / REPORT MENU                            /
-         > /  11) Search all franchises             /
-         > /  12) Search all games                  /
+         > /  11) Search all franchises by name     /
+         > /  12) Search all games by name          /
          > /  13) List currently active franchises  /
          > /  14) List currently produced games     /
          > ------------------------------------------
+         > / ADDITIONAL SEARCH MENU                 /
+         > /  15) Search franchises by Publisher    /
+         > /  16) Search franchises by Worth        /
+         > /  17) Search franchises by Genre        /
+         > /  18) Search games by Price             /
+         > /  19) Search games by Publisher         /
+         > ------------------------------------------
          > / DATA MENU                              /
-         > /  15) Save data                         /
-         > /  16) Load data                         /
+         > /  20) Save data                         /
+         > /  21) Load data                         /
          > ------------------------------------------
          > /   0) Exit                              /
          > ------------------------------------------
@@ -71,8 +78,14 @@ fun runMenu() {
             13 -> listActiveFranchises()
             14 -> listProducedGames()
 
-            15 -> save()
-            16 -> load()
+            15 -> searchFranchiseByPublisher()
+            16 -> searchFranchiseByWorth()
+            17 -> searchFranchiseByGenre()
+            18 -> searchGameByPrice()
+            19 -> searchGameByPublisher()
+
+            20 -> save()
+            21 -> load()
             0 -> exit()
             else -> println("Invalid option entered: $option")
         }
@@ -243,6 +256,57 @@ fun setGameProduced() {
     }
 }
 
+// ADDITIONAL SEARCH /////////////////////////////////////////////////////////////////
+fun searchFranchiseByPublisher() {
+    val searchPublisher = readNextLine("Enter the publisher of franchises to search for: ")
+    val searchResults = franchiseAPI.searchFranchisePublisher(searchPublisher)
+    if (searchResults.isEmpty()) {
+        println("No franchises of that publisher found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchFranchiseByWorth() {
+    val searchWorth = readNextInt("Enter the max worth of franchises to search for: ")
+    val searchResults = franchiseAPI.searchFranchiseWorth(searchWorth)
+    if (searchResults.isEmpty()) {
+        println("No franchises below that worth found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchFranchiseByGenre() {
+    val searchGenre = readNextLine("Enter the genre of franchises to search for: ")
+    val searchResults = franchiseAPI.searchFranchiseGenre(searchGenre)
+    if (searchResults.isEmpty()) {
+        println("No franchises of that genre found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchGameByPrice() {
+    val searchPrice = readNextInt("Enter max price of game to search for: ")
+    val searchResults = franchiseAPI.searchGamePrice(searchPrice)
+    if (searchResults.isEmpty()) {
+        println("No games below that price found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchGameByPublisher() {
+    val searchPublisher = readNextLine("Enter the publisher of games to search for: ")
+    val searchResults = franchiseAPI.searchGamePublisher(searchPublisher)
+    if (searchResults.isEmpty()) {
+        println("No games of that publisher found")
+    } else {
+        println(searchResults)
+    }
+}
+
 // HELPERS ///////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
     listFranchises()
@@ -283,6 +347,7 @@ private fun chooseGame(franchise: Franchise): Game? {
     }
 }
 
+// SAVE LOAD /////////////////////////////////////////////////////////////////////////
 fun save() {
     try {
         franchiseAPI.save()
