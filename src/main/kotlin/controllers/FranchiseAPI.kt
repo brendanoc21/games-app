@@ -90,6 +90,9 @@ class FranchiseAPI(serializerType: Serializer) {
             return true
         } else if ((foundFranchise != null) && (foundFranchise.franActivity)) {
             foundFranchise.franActivity = false
+            for (game in foundFranchise.games) {
+                game.gameProduced = false
+            }
             return true
         }
         return false

@@ -228,12 +228,12 @@ fun setGameProduced() {
             var changeStatus: Char
             if (game.gameProduced) {
                 changeStatus =
-                    ScannerInput.readNextChar("The game is in production, do you want to stop production? Y/N")
+                    ScannerInput.readNextChar("The game is in production, do you want to stop production? Y/N: ")
                 if ((changeStatus == 'Y') || (changeStatus == 'y'))
                     game.gameProduced = false
             } else {
                 changeStatus =
-                    ScannerInput.readNextChar("The game is not currently produced, do you want to start production? Y/N")
+                    ScannerInput.readNextChar("The game is not currently produced, do you want to start production? Y/N: ")
                 if ((changeStatus == 'Y') || (changeStatus == 'y'))
                     game.gameProduced = true
             }
@@ -284,6 +284,7 @@ private fun chooseGame(franchise: Franchise): Game? {
 fun save() {
     try {
         franchiseAPI.save()
+        println("Save Successful")
     } catch (e: Exception) {
         System.err.println("Error writing to file: $e")
     }
@@ -292,6 +293,7 @@ fun save() {
 fun load() {
     try {
         franchiseAPI.load()
+        println("Load Successful")
     } catch (e: Exception) {
         System.err.println("Error reading from file: $e")
     }
