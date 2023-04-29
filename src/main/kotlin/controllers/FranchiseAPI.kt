@@ -152,7 +152,6 @@ class FranchiseAPI(serializerType: Serializer) {
             gameAmount
         }
 
-
 // SEARCHES //////////////////////////////////////////////////////////////////////////
     fun searchFranchiseName(searchString: String) =
         formatListString(franchises.filter { franchise -> franchise.franName.contains(searchString, ignoreCase = true) })
@@ -204,9 +203,9 @@ class FranchiseAPI(serializerType: Serializer) {
             var listOfFranchises = ""
             for (franchise in franchises) {
                 if (franchise.franPublisher.contains(searchString, ignoreCase = true))
-                for (game in franchise.games) {
-                    listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
-                }
+                    for (game in franchise.games) {
+                        listOfFranchises += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
             }
             if (listOfFranchises == "") "No games found for: $searchString"
             else listOfFranchises
