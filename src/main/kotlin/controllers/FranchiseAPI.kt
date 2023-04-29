@@ -37,6 +37,14 @@ class FranchiseAPI(serializerType: Serializer) {
         if (franchises.isEmpty()) "There are no Franchises"
         else formatListString(franchises)
 
+    fun listActiveFranchises() =
+        if (numberOfActiveFranchises() == 0) "No active franchises in database"
+        else formatListString(franchises.filter { franchise -> franchise.franActivity })
+
+    fun listInactiveFranchises() =
+        if (numberOfInactiveFranchises() == 0) "No inactive franchises in database"
+        else formatListString(franchises.filter { franchise -> !franchise.franActivity })
+
     fun listAllGames() =
         if (franchises.isEmpty()) "There are no Franchises or Games"
         else {
@@ -72,7 +80,20 @@ class FranchiseAPI(serializerType: Serializer) {
     }
 
     fun numberOfFranchises() = franchises.size
+    fun numberOfActiveFranchises(): Int = franchises.count { franchise: Franchise -> franchise.franActivity }
+    fun numberOfInactiveFranchises(): Int = franchises.count { franchise: Franchise -> !franchise.franActivity }
 
+    fun changeFranActivity(id: Int): Boolean {
+        val foundFranchise = findFranchise(id)
+        if ((foundFranchise != null) && (!foundFranchise.franActivity)) {
+            foundFranchise.franActivity = true
+            return true
+        } else if ((foundFranchise != null) && (foundFranchise.franActivity)) {
+            foundFranchise.franActivity = false
+            return true
+        }
+        return false
+    }
     @Throws(Exception::class)
     fun save() {
         serializer.write(franchises)

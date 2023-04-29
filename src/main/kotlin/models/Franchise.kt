@@ -50,4 +50,5 @@ data class Franchise(
     fun listGames() =
         if (games.isEmpty()) "\tNo Games Added"
         else Utilities.formatSetString(games)
+
 }
