@@ -17,31 +17,35 @@ fun main() {
 fun mainMenu(): Int {
     return ScannerInput.readNextInt(
         """ 
-         > --------------------------------------
-         > /        FRANCHISE APP PROJECT       /
-         > --------------------------------------
-         > / FRANCHISE MENU                     /
-         > /   1) Add a franchise               /
-         > /   2) Update franchises             /
-         > /   3) Delete franchises             /
-         > /   4) List franchises               /
-         > --------------------------------------
-         > / GAME MENU                          /
-         > /   5) Add a game to a franchise     /
-         > /   6) Update a game from a franchise/
-         > /   7) Delete a game from a franchise/
-         > /   8) List all games                /
-         > --------------------------------------
-         > / REPORT MENU                        /
-         > /   9) Search all franchises         /
-         > /  10) Search all games              /
-         > --------------------------------------
-         > / DATA MENU                          /
-         > /  11) Save data                     /
-         > /  12) Load data                     /
-         > --------------------------------------
-         > /   0) Exit                          /
-         > -------------------------------------- 
+         > ------------------------------------------
+         > /        FRANCHISE APP PROJECT           /
+         > ------------------------------------------
+         > / FRANCHISE MENU                         /
+         > /   1) Add a franchise                   /
+         > /   2) Update franchises                 /
+         > /   3) Delete franchises                 /
+         > /   4) List franchises                   /
+         > /   5) Set franchise active status       /
+         > ------------------------------------------
+         > / GAME MENU                              /
+         > /   6) Add a game to a franchise         /
+         > /   7) Update a game from a franchise    /
+         > /   8) Delete a game from a franchise    /
+         > /   9) List all games                    /
+         > /  10) Set game production status        /
+         > ------------------------------------------
+         > / REPORT MENU                            /
+         > /  11) Search all franchises             /
+         > /  12) Search all games                  /
+         > /  13) List currently active franchises  /
+         > /  14) List currently produced games     /
+         > ------------------------------------------
+         > / DATA MENU                              /
+         > /  15) Save data                         /
+         > /  16) Load data                         /
+         > ------------------------------------------
+         > /   0) Exit                              /
+         > ------------------------------------------
          > ==>> """.trimMargin(">")
     )
 }
@@ -54,17 +58,21 @@ fun runMenu() {
             2 -> updateFranchise()
             3 -> deleteFranchise()
             4 -> listFranchises()
+            5 -> setFranchiseActivity()
 
-            5 -> addGame()
-            6 -> updateGame()
-            7 -> deleteGame()
-            8 -> listGames()
+            6 -> addGame()
+            7 -> updateGame()
+            8 -> deleteGame()
+            9 -> listGames()
+            10 -> setGameProduced()
 
-            9 -> searchFranchises()
-            10 -> searchGames()
+            11 -> searchFranchises()
+            12 -> searchGames()
+            13 -> listActiveFranchises()
+            14 -> listProducedGames()
 
-            11 -> save()
-            12 -> load()
+            15 -> save()
+            16 -> load()
             0 -> exit()
             else -> println("Invalid option entered: $option")
         }
@@ -132,6 +140,25 @@ fun searchFranchises() {
 
 fun listFranchises() = println(franchiseAPI.listAllFranchises())
 
+fun listActiveFranchises() = println(franchiseAPI.listActiveFranchises())
+
+fun listInactiveFranchises() = println(franchiseAPI.listInactiveFranchises())
+
+fun setFranchiseActivity() {
+    println("ACTIVE FRANCHISES!")
+    listActiveFranchises()
+    println("INACTIVE FRANCHISES!")
+    listInactiveFranchises()
+    if (franchiseAPI.numberOfFranchises() > 0) {
+        val id = readNextInt("Enter the id of the franchise to adjust: ")
+        if (franchiseAPI.changeFranActivity(id)) {
+            println("Activity change successful!")
+        } else {
+            println("Activity change failed")
+        }
+    }
+}
+
 // GAMES ///////////////////////////////////////////////////////////////////////////////
 private fun addGame() {
     val franchise: Franchise? = chooseFranchise()
@@ -192,6 +219,29 @@ fun searchGames() {
 }
 
 fun listGames() = println(franchiseAPI.listAllGames())
+fun listProducedGames() = println(franchiseAPI.listProducedGames())
+fun listNotProducedGames() = println(franchiseAPI.listNotProducedGames())
+
+fun setGameProduced() {
+    val franchise: Franchise? = chooseActiveFranchise()
+    if (franchise != null) {
+        val game: Game? = chooseGame(franchise)
+        if (game != null) {
+            var changeStatus: Char
+            if (game.gameProduced) {
+                changeStatus =
+                    ScannerInput.readNextChar("The game is in production, do you want to stop production? Y/N: ")
+                if ((changeStatus == 'Y') || (changeStatus == 'y'))
+                    game.gameProduced = false
+            } else {
+                changeStatus =
+                    ScannerInput.readNextChar("The game is not currently produced, do you want to start production? Y/N: ")
+                if ((changeStatus == 'Y') || (changeStatus == 'y'))
+                    game.gameProduced = true
+            }
+        }
+    }
+}
 
 // HELPERS ///////////////////////////////////////////////////////////////////////////
 private fun chooseFranchise(): Franchise? {
@@ -202,6 +252,23 @@ private fun chooseFranchise(): Franchise? {
             return franchise
         } else {
             println("Franchise id is invalid")
+        }
+    }
+    return null
+}
+
+private fun chooseActiveFranchise(): Franchise? {
+    listActiveFranchises()
+    if (franchiseAPI.numberOfActiveFranchises() > 0) {
+        val franchise = franchiseAPI.findFranchise(readNextInt("\nEnter the id of an Active Franchise: "))
+        if (franchise != null) {
+            if (!franchise.franActivity) {
+                println("Only an Active Franchise can have games in production")
+            } else {
+                return franchise
+            }
+        } else {
+            println("Invalid franchise id")
         }
     }
     return null
@@ -219,6 +286,7 @@ private fun chooseGame(franchise: Franchise): Game? {
 fun save() {
     try {
         franchiseAPI.save()
+        println("Save Successful")
     } catch (e: Exception) {
         System.err.println("Error writing to file: $e")
     }
@@ -227,6 +295,7 @@ fun save() {
 fun load() {
     try {
         franchiseAPI.load()
+        println("Load Successful")
     } catch (e: Exception) {
         System.err.println("Error reading from file: $e")
     }
