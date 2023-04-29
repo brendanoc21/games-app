@@ -64,7 +64,7 @@ class FranchiseAPI(serializerType: Serializer) {
             var listOfGames = ""
             for (franchise in franchises) {
                 for (game in franchise.games) {
-                    if(game.gameProduced) {
+                    if (game.gameProduced) {
                         listOfGames += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
                     }
                 }
@@ -79,7 +79,7 @@ class FranchiseAPI(serializerType: Serializer) {
             var listOfGames = ""
             for (franchise in franchises) {
                 for (game in franchise.games) {
-                    if(!game.gameProduced) {
+                    if (!game.gameProduced) {
                         listOfGames += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
                     }
                 }
@@ -131,7 +131,7 @@ class FranchiseAPI(serializerType: Serializer) {
             var gameAmount = 0
             for (franchise in franchises) {
                 for (game in franchise.games) {
-                    if(game.gameProduced) {
+                    if (game.gameProduced) {
                         gameAmount++
                     }
                 }
@@ -145,7 +145,7 @@ class FranchiseAPI(serializerType: Serializer) {
             var gameAmount = 0
             for (franchise in franchises) {
                 for (game in franchise.games) {
-                    if(!game.gameProduced) {
+                    if (!game.gameProduced) {
                         gameAmount++
                     }
                 }
