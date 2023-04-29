@@ -68,8 +68,8 @@ fun runMenu() {
 
             11 -> searchFranchises()
             12 -> searchGames()
-            // 13 -> searchActiveFranchises()
-            // 14 -> searchProducedGames()
+            13 -> listActiveFranchises()
+            14 -> listProducedGames()
 
             15 -> save()
             16 -> load()
@@ -219,6 +219,8 @@ fun searchGames() {
 }
 
 fun listGames() = println(franchiseAPI.listAllGames())
+fun listProducedGames() = println(franchiseAPI.listProducedGames())
+fun listNotProducedGames() = println(franchiseAPI.listNotProducedGames())
 
 fun setGameProduced() {
     val franchise: Franchise? = chooseActiveFranchise()

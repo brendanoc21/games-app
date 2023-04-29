@@ -58,6 +58,36 @@ class FranchiseAPI(serializerType: Serializer) {
             else listOfGames
         }
 
+    fun listProducedGames() =
+        if (franchises.isEmpty()) "There are no Franchises or Games"
+        else {
+            var listOfGames = ""
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if(game.gameProduced) {
+                        listOfGames += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
+                }
+            }
+            if (listOfGames == "") "No Games in production"
+            else listOfGames
+        }
+
+    fun listNotProducedGames() =
+        if (franchises.isEmpty()) "There are no Franchises or Games"
+        else {
+            var listOfGames = ""
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if(!game.gameProduced) {
+                        listOfGames += "${franchise.franId}: ${franchise.franName} \n\t${game}\n"
+                    }
+                }
+            }
+            if (listOfGames == "") "No Games not in production"
+            else listOfGames
+        }
+
     fun findFranchise(franId: Int) = franchises.find { franchise -> franchise.franId == franId }
 
     fun searchFranchiseName(searchString: String) =
@@ -82,6 +112,46 @@ class FranchiseAPI(serializerType: Serializer) {
     fun numberOfFranchises() = franchises.size
     fun numberOfActiveFranchises(): Int = franchises.count { franchise: Franchise -> franchise.franActivity }
     fun numberOfInactiveFranchises(): Int = franchises.count { franchise: Franchise -> !franchise.franActivity }
+
+    fun numberOfGames() =
+        if (franchises.isEmpty()) 0
+        else {
+            var gameAmount = 0
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    gameAmount ++
+                }
+            }
+            gameAmount
+        }
+
+    fun numberOfProducedGames() =
+        if (franchises.isEmpty()) 0
+        else {
+            var gameAmount = 0
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if(game.gameProduced) {
+                        gameAmount++
+                    }
+                }
+            }
+            gameAmount
+        }
+
+    fun numberOfNotProducedGames() =
+        if (franchises.isEmpty()) 0
+        else {
+            var gameAmount = 0
+            for (franchise in franchises) {
+                for (game in franchise.games) {
+                    if(!game.gameProduced) {
+                        gameAmount++
+                    }
+                }
+            }
+            gameAmount
+        }
 
     fun changeFranActivity(id: Int): Boolean {
         val foundFranchise = findFranchise(id)
